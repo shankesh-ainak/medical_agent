@@ -6,6 +6,8 @@ review**. It plans, reads the chart, reconciles medications, surfaces conflicts
 and pending results, checks drug interactions, escalates safety concerns — and,
 above all, **never invents a clinical fact**.
 
+Demo video - https://drive.google.com/file/d/10j4nUKcrIkTq68Nt-r1HdwW_sj-AKRjX/view?usp=sharing
+
 > The output is always a *draft for review*, never a finalized clinical
 > document. Gaps and disagreements are surfaced, not filled.
 

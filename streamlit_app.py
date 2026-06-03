@@ -44,18 +44,19 @@ st.title("🩺 dscribe — Agentic Discharge Summary")
 if not CONFIG.openai_api_key:
     st.error("OPENAI_API_KEY is not set. Add it to a .env file (see .env.example).")
 
+# ============================ SIDEBAR: INPUTS ============================
+with st.sidebar:
+    st.header("Patient bundle")
+    uploaded = st.file_uploader("Upload source-note PDF bundle", type=["pdf"])
+    use_cache = st.checkbox("Use cached OCR", value=True,
+                            help="Reuse extraction from a previous run of the same file.")
+    go = st.button("Generate discharge summary", type="primary",
+                   disabled=uploaded is None, use_container_width=True)
+
 tab_summary, tab_chat = st.tabs(["📝 Discharge Summary", "💬 Ask the Chart"])
 
 # ============================ TAB 1: SUMMARY ============================
 with tab_summary:
-    uploaded = st.file_uploader("Upload patient source-note PDF bundle", type=["pdf"])
-    col1, col2 = st.columns([1, 3])
-    with col1:
-        use_cache = st.checkbox("Use cached OCR", value=True,
-                                help="Reuse extraction from a previous run of the same file.")
-        go = st.button("Generate discharge summary", type="primary",
-                       disabled=uploaded is None)
-
     if go and uploaded is not None:
         pdf_path = _save_upload(uploaded)
         with st.spinner("Reading the chart, reconciling, drafting… (vision OCR can take a while)"):
